@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Data To PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- html2pdf CDN link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="" data-bs-theme="dark">
+    <div class="form" >
+        <div class="">
+            <h1 class="">Converting Form Data to PDF</h1>
+        </div>
+        
+        
+        <div class="form w-50">
+            <form action="">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Student Name</span>
+                    <input type="text" id="sname" class="form-control" placeholder="Ramesh Sharma" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+        
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Enrollment Number</span>
+                    <input type="text" id="en" class="form-control" placeholder="202203103510124" aria-label="Username"
+                        aria-describedby="basic-addon1">
+                </div>
+        
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Tution Fee</span>
+                    <span class="input-group-text">₹</span>
+                    <input type="text" id="tf" class="form-control"
+                        aria-label="Dollar amount (with dot and two decimal places)">
+                </div>
+        
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Library Fee</span>
+                    <span class="input-group-text">₹</span>
+                    <input type="text" id="lf" class="form-control"
+                        aria-label="Dollar amount (with dot and two decimal places)">
+                </div>
+        
+                <button type="button" onclick="generatePDF()">Get PDF</button>
+        
+            </form>
+        </div>
+    </div>
+
+    <div class="feeReciptLayout" id="feeReciptLayout" data-bs-theme="blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <h1 class="text-center mb-4">Fee Receipt</h1>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" id="sname2">Student: John Doe</h4>
+                            <p class="card-text">Receipt No: 123456789</p>
+                            <p class="card-text" id="en2">Enrollment No: 123456789</p>
+                            <p class="card-text">Date: 2023-05-13</p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tuition Fee</td>
+                                        <td id="tf2">$500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Library Fee</td>
+                                        <td id="lf2">$50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>$550</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-right font-weight-bold">Total Amount: $550</p>
+                            <p class="text-center">Thank you for your payment!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        // getting values
+        let sname = document.getElementById('sname')
+        let en = document.getElementById('en')
+        let tf = document.getElementById('tf')
+        let lf = document.getElementById('lf')
+
+        
+        function generatePDF() {
+        // putting values
+        document.getElementById('sname2').innerHTML = sname.value
+        document.getElementById('en2').innerHTML = en.value
+        document.getElementById('tf2').innerHTML = tf.value
+        document.getElementById('lf2').innerHTML = lf.value
+
+            // Choose the element that your content will be rendered to.
+            const element = document.getElementById("feeReciptLayout");
+            // Choose the element and save the PDF for your user.
+            html2pdf().from(element).save();
+        }
+
+    </script>
+</body>
+
+</html>
